@@ -43,18 +43,20 @@ public class AuthController {
         String accessToken = jwtUtil.generateAccessToken(user.getUsername());
         String refreshToken = jwtUtil.generateRefreshToken(user.getUsername());
 
-        Cookie accessCookie = new Cookie("Authorization", URLEncoder.encode(accessToken, StandardCharsets.UTF_8));
+        Cookie accessCookie = new Cookie("Authorization", accessToken);
         accessCookie.setHttpOnly(true);
         accessCookie.setSecure(true);
         accessCookie.setPath("/");
         accessCookie.setMaxAge(60 * 60); // 1시간
+        accessCookie.setAttribute("SameSite", "None");
         response.addCookie(accessCookie);
 
-        Cookie refreshCookie = new Cookie("Refresh-Token", URLEncoder.encode(refreshToken, StandardCharsets.UTF_8));
+        Cookie refreshCookie = new Cookie("Refresh-Token", refreshToken);
         refreshCookie.setHttpOnly(true);
         refreshCookie.setSecure(true);
         refreshCookie.setPath("/");
         refreshCookie.setMaxAge(60 * 60 * 24 * 7); // 7일
+        refreshCookie.setAttribute("SameSite", "None");
         response.addCookie(refreshCookie);
 
         return ResponseEntity.ok("");

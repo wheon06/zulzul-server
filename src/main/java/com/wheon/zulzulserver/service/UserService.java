@@ -21,6 +21,7 @@ public class UserService {
         UserEntity newUser = UserEntity.builder()
                 .username(user.getUsername())
                 .password(user.getPassword())
+                .role("ROLE_USER")
                 .build();
 
         return userRepository.save(newUser);

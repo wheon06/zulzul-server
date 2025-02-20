@@ -15,16 +15,20 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(nullable = false)
     private String username;
 
-    @Column
+    @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
+    private String role;
+
     @Builder
-    public UserEntity(String username, String password) {
+    public UserEntity(String username, String password, String role) {
         this.username = username;
         this.password = password;
+        this.role = role;
     }
 
 }
