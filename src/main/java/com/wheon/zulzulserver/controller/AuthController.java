@@ -63,7 +63,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public UserEntity register(@RequestBody AuthRequestDto request) {
+    public ResponseEntity<String> register(@RequestBody AuthRequestDto request) {
         UserEntity user = UserEntity.builder()
                 .username(request.getUsername())
                 .password(passwordEncoder.encode(request.getPassword()))
